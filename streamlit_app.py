@@ -26,10 +26,10 @@ def recommend(movie):
 
     return recommended_movie_names, recommended_movie_posters
 
+
 def download_file_from_google_drive(file_id, destination):
     URL = "https://drive.google.com/uc?id={}".format(file_id)
-    session = requests.Session()
-    response = session.get(URL, stream=True)
+    response = requests.get(URL, stream=True)
 
     with open(destination, "wb") as f:
         for chunk in response.iter_content(chunk_size=32768):
