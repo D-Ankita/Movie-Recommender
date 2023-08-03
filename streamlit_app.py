@@ -46,6 +46,10 @@ similarity_url = '1kDgAuqZZDLtf8sNuAnvd9CqQbESpmwVT'
 download_file_from_google_drive(similarity_url, 'similarity.pkl')
 
 def main():
+    # Construct the full file paths
+    movielist_file_path = os.path.join(os.getcwd(), 'movielist.pkl')
+    similarity_file_path = os.path.join(os.getcwd(), 'similarity.pkl')
+
     # Load the data from the downloaded .pkl files
     with open('movielist.pkl', 'rb') as movielist_file:
         movies = pickle.load(movielist_file)
