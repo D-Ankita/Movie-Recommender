@@ -3,7 +3,6 @@
 
 import pickle
 import streamlit as st
-import wget
 
 
 def fetch_poster(movie_id):
