@@ -27,15 +27,25 @@ def recommend(movie):
 
     return recommended_movie_names, recommended_movie_posters
 
+def download_file_from_google_drive(file_id, destination):
+    URL = "https://drive.google.com/uc?id={}".format(file_id)
+    session = requests.Session()
+    response = session.get(URL, stream=True)
+
+    with open(destination, "wb") as f:
+        for chunk in response.iter_content(chunk_size=32768):
+            if chunk:
+                f.write(chunk)
+
+# Download movielist.pkl
+movielist_url = '1-kzQLRH7tOezhEmqH8S75oIQLyrX0OrO'
+download_file_from_google_drive(movielist_url, 'movielist.pkl')
+
+# Download similarity.pkl
+similarity_url = '1kDgAuqZZDLtf8sNuAnvd9CqQbESpmwVT'
+download_file_from_google_drive(similarity_url, 'similarity.pkl')
+
 def main():
-    # Download movielist.pkl
-    movielist_url = 'https://drive.google.com/uc?id=1-kzQLRH7tOezhEmqH8S75oIQLyrX0OrO'
-    wget.download(movielist_url, 'movielist.pkl')
-
-    # Download similarity.pkl
-    similarity_url = 'https://drive.google.com/uc?id=1kDgAuqZZDLtf8sNuAnvd9CqQbESpmwVT'
-    wget.download(similarity_url, 'similarity.pkl')
-
     # Load the data from the downloaded .pkl files
     with open('movielist.pkl', 'rb') as movielist_file:
         movies = pickle.load(movielist_file)
