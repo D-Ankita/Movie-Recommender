@@ -1,6 +1,10 @@
+
+
+
 import pickle
 import streamlit as st
 import gdown  
+import wget
 
 
 def fetch_poster(movie_id):
@@ -27,11 +31,11 @@ def recommend(movie):
 def main():
     # Download movielist.pkl
     movielist_url = 'https://drive.google.com/uc?id=1-kzQLRH7tOezhEmqH8S75oIQLyrX0OrO'
-    gdown.download(movielist_url, 'movielist.pkl', quiet=False)
+    wget.download(movielist_url, 'movielist.pkl')
 
     # Download similarity.pkl
     similarity_url = 'https://drive.google.com/uc?id=1kDgAuqZZDLtf8sNuAnvd9CqQbESpmwVT'
-    gdown.download(similarity_url, 'similarity.pkl', quiet=False)
+    wget.download(similarity_url, 'similarity.pkl')
 
     # Load the data from the downloaded .pkl files
     with open('movielist.pkl', 'rb') as movielist_file:
